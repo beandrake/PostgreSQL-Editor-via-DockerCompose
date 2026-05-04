@@ -26,12 +26,16 @@ services:
       db:
         condition: service_healthy
     
-#  web:
-#    build: nginx
-#    ports:
-#      - "80:80" # http
-#    networks:
-#      - frontend
+  frontend:
+    build: frontend
+    ports:
+      - "5173:5173" # http is 80:80 (for prod)
+    environment:
+      NODE_ENV: development
+    stdin_open: true  # keep the container running and interactive
+    tty: true         # keep the container running and interactive
+    networks:
+      - frontend-network
 
   db: #NOTE: this is treated as the server/computer name
     image: postgres:13.22-alpine
