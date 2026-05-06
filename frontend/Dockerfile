@@ -15,7 +15,8 @@ COPY package*.json ./
 COPY vite.config.js ./
 
 # Install dependencies.
-RUN npm install
+#RUN npm install
+RUN --mount=type=cache,target=/root/.npm npm install
 
 # Copy local content to the container's working directory (except dockerignore)
 COPY . .

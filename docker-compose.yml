@@ -27,19 +27,24 @@ services:
       db:
         condition: service_healthy
     
-  frontend:
+  frontend: # currently this is all dev, do not use for prod
     build: frontend
     ports:
-      - "5173:5173" # http is 80:80 (for prod)
+      - "5173:5173"
     environment:
       NODE_ENV: development
-      #VITE_BACKEND_URL: http://backend:5000
+      #VITE_BACKEND_URL: http://backend:5000 # was using this as a way to fetch from backend, now using vite.config.js
     stdin_open: true  # keep the container running and interactive
     tty: true         # keep the container running and interactive
     networks:
       - frontend-network
     depends_on:
       - backend
+    develop:
+      watch:  # enables Compose Watch to sync files between Docker and local (don't use in prod)
+        - action: sync
+          path: frontend
+          target: /app
 
   db: #NOTE: this is treated as the server/computer name
     image: postgres:13.22-alpine

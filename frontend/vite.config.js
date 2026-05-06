@@ -9,5 +9,9 @@ export default defineConfig({
 	  //forward any requests with URL starting with /api to Flask backend URL
       '/api': 'http://backend:5000', 
     },
+
+	host: true, // allows dev server to be accessed from outside container
+	port: 5173, // sets a consistent dev port (must match exposed port)
+	strictPort: true, // don't use a different port if 5173 is unavailable
   },
 })

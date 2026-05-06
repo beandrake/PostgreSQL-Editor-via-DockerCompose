@@ -2,13 +2,16 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import QueryForm from './components/QueryForm';
 import ResultsGrid from './components/ResultsGrid';
+import './App.css';
 
 function App() {
 	const [itemGrid, setItemGrid] = useState(null);
 	const [count, setCount] = useState(0);
 	const [currentTime, setCurrentTime] = useState(0);
-	
 	//const backendURL = import.meta.env.VITE_BACKEND_URL; // https://vite.dev/guide/env-and-mode.html
+	
+
+	// NOTE: React knows where to send fetch requests, see vite.config.js	
 
 	
 	function performSampleQuery() {
@@ -51,7 +54,7 @@ function App() {
 
 	return (
 		<>
-			<p>if you see this then congrats, it's working</p>
+			<p>if you see this then congrats, it's working too good</p>
 			<div className="upper">
 				<button onClick={() => setCount((count) => count + 1)}>
 					count is {count}
@@ -64,7 +67,7 @@ function App() {
 				</p>
 				<QueryForm
 					runQuery={performSampleQuery}
-					defaultQueryText={"put a query here"}
+					defaultQueryText={"put a query here please"}
 				/>			
 			</div>
 			<div className="lower">
