@@ -33,7 +33,7 @@ services:
       - "5173:5173" # http is 80:80 (for prod)
     environment:
       NODE_ENV: development
-      VITE_BACKEND_URL: http://backend:5000
+      #VITE_BACKEND_URL: http://backend:5000
     stdin_open: true  # keep the container running and interactive
     tty: true         # keep the container running and interactive
     networks:

@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-	  //forward any requests with URL starting with /api to port 5000 (Flask)
-      '/api': 'http://localhost:5000', 
+	  //forward any requests with URL starting with /api to Flask backend URL
+      '/api': 'http://backend:5000', 
     },
   },
 })

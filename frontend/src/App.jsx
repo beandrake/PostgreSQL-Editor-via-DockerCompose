@@ -8,7 +8,7 @@ function App() {
 	const [count, setCount] = useState(0);
 	const [currentTime, setCurrentTime] = useState(0);
 	
-	const backendURL = import.meta.env.VITE_BACKEND_URL; // https://vite.dev/guide/env-and-mode.html
+	//const backendURL = import.meta.env.VITE_BACKEND_URL; // https://vite.dev/guide/env-and-mode.html
 
 	
 	function performSampleQuery() {
@@ -22,11 +22,11 @@ function App() {
 	}
 
 	function checkReadyAPI() {
-		console.log("Sending query...");	
-		console.log(backendURL + '/api/ready');
+		console.log("Sending query...");
 		fetch
 		(
-			backendURL + '/api/ready'
+			//backendURL + 
+			'/api/ready'
 		).then(
 			response => {
 				if (response.ok) {
