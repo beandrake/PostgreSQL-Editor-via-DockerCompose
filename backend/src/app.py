@@ -5,6 +5,7 @@ from db import create_connection
 from getFile import get_and_parse_data
 from loadTables import load_tables
 
+
 # PostgreSQL
 DEFAULT_DATABASE = 'postgres'
 DEFAULT_USER = 'postgres'
@@ -37,17 +38,23 @@ def initialize_records():
 	load_tables(cursor, rivenData["timestamp"], rivenData["records"])
 
 
+apiReady = False
 print("Initializing records...")
 initialize_records()
 print("Records initialized.")
+apiReady = True
 
 
 app = Flask(__name__)
 
-
+@app.route('/')
+def hello():
+	return "Hello World!"
 
 @app.route('/api/time')
 def get_current_time():
     return {'time': time.time()}
 
-
+@app.route('/api/ready')
+def get_api_ready():
+	return {'ready': apiReady}

@@ -1,0 +1,83 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+}
+
+#root {
+	height: 100%;
+	margin: 0 auto;
+	text-align: left;
+}
+
+
+.upper {
+	height: 50%;
+	width: 100vw;
+	text-align: center;
+}
+
+form {
+	height: 80%;
+}
+
+textarea {
+	width: 95%;
+	height: 80%;
+}
+
+.lower {
+	width: 100vw;
+	height: 50vh;
+	overflow: auto;
+}
+
+
+table, th, td {
+	padding-left: 9px;
+	padding-right: 9px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+th, td {
+	font-family: monospace, monospace;
+	text-align: left;
+	white-space: nowrap;
+}
+
+th {
+	position: sticky;
+	top: 0;
+	background-color: rgb(22, 127, 146);
+	color: white;
+	border-top: 2px solid rgb(77, 77, 77);
+	border-bottom: 2px solid rgb(77, 77, 77);
+	border-right: 2px solid rgb(77, 77, 77);
+}
+
+th:first-child {
+	border-left: 2px solid rgb(77, 77, 77);
+}
+
+tr:nth-child(even) {
+  background-color: rgb(234, 243, 243);
+}
+
+td {
+	/*color: rgb(2, 68, 87);*/
+	border-bottom: 1px solid rgb(145, 145, 145);
+	border-right: 1px solid rgb(145, 145, 145);
+}
+
+td:first-child {
+	border-left: 1px solid rgb(145, 145, 145);
+}

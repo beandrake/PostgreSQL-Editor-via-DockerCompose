@@ -9,8 +9,11 @@ def load_tables(cursor, timestamp, fullRecords):
 	
 
 def queryDisplay(cursor, query):
+	print("Executing the following query:")
+	print(query)
 	cursor.execute(query)
 	
+	print("Results of query:")
 	result = cursor.fetchone()
 	while result is not None:
 		print(result)

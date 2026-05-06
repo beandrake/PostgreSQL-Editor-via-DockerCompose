@@ -12,6 +12,7 @@ WORKDIR /app
 
 # Copy dependencies file to the working directory.
 COPY package*.json ./
+COPY vite.config.js ./
 
 # Install dependencies.
 RUN npm install
@@ -25,7 +26,7 @@ RUN chown -R node:node /app
 # Switch to the built-in non-root "node" user
 USER node
 
-# Expose the port React frontend runs on
+# Makes this container's port available to other containers
 EXPOSE 5173
 
 # Run this command, which starts the Vite development server.

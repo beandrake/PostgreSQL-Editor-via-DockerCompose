@@ -18,10 +18,11 @@ services:
       - frontend-network
       - backend-network
     ports:
-      #  - "5000:5000"  # removed when we added the nginx part below, because the nginx will take care of this for us
+      - "5000:5000"  # remove if using the nginx part below, because the nginx will take care of this for us
       - "5678:5678"
     environment:  # sets environment variables
-      - DEBUG=True
+      - DEBUG=True    
+    stop_signal: SIGINT # flask requires SIGINT to stop gracefully (default stop signal from Compose is SIGTERM)
     depends_on:   # won't start until db healthcheck returns true
       db:
         condition: service_healthy
@@ -32,10 +33,13 @@ services:
       - "5173:5173" # http is 80:80 (for prod)
     environment:
       NODE_ENV: development
+      VITE_BACKEND_URL: http://backend:5000
     stdin_open: true  # keep the container running and interactive
     tty: true         # keep the container running and interactive
     networks:
       - frontend-network
+    depends_on:
+      - backend
 
   db: #NOTE: this is treated as the server/computer name
     image: postgres:13.22-alpine
