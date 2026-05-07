@@ -11,14 +11,17 @@ services:
     build: backend  # targets the listed directory as the location to find a Dockerfile to build from
     volumes:
       - "./config:/config"
-      - "./backend/src:/code" # This allows us to change Python code while a container is running so we can debug and test on the fly.
+      - "./backend/src:/code" # This allows us to change Python code while a container is running
+                              # so we can debug and test on the fly.  A more modern solution for this specific
+                              # use case would be to use Compose Watch (which the frontend uses), but since
+                              # this is a personal project I'm leaving the volume here to get experience with it.
     secrets:
       - db_password
     networks:
       - frontend-network
       - backend-network
     ports:
-      - "5000:5000"  # remove if using the nginx part below, because the nginx will take care of this for us
+      #- "5000:5000"  # makes API available via local brower for testing
       - "5678:5678"
     environment:  # sets environment variables
       - DEBUG=True    
@@ -41,7 +44,7 @@ services:
     depends_on:
       - backend
     develop:
-      watch:  # enables Compose Watch to sync files between Docker and local (don't use in prod)
+      watch:  # enables Compose Watch to sync files from local to the container (don't use in prod)
         - action: sync
           path: frontend
           target: /app
