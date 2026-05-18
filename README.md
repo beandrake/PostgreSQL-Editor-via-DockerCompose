@@ -14,7 +14,7 @@ I wanted to tinker with PostgreSQL, so I decided to use Docker Compose to get a 
 
        docker compose watch
 	   
-5. Open your local web browswer to `http://localhost:5173/`.
+5. Open your local web browser to `http://localhost:5173/`.
 
 6. The interface allows you to write and execute one [`PostgreSQL`](https://www.postgresql.org/about/) statement at a time.  Several database tables are preloaded with some simple statistical data each time the program is run, in case you'd like to play around with that.
 
