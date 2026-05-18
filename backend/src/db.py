@@ -34,12 +34,17 @@ class PostgresDatabase:
 		"""
 		cursor = self.getCursor()
 		cursor.execute(query, values)
+		self.connection.commit()
+		
+		# If there are no results, we're done.
+		if cursor.description == None:
+			return None
+		
+		# Get the headers and the records and return them as a dictionary
 		headerList = [desc[0] for desc in cursor.description]
 		recordList = []
 		for record in cursor:
 			recordList.append(record)
-		
-		self.connection.commit()
 		return {
 			"headers": headerList,
 			"records": recordList

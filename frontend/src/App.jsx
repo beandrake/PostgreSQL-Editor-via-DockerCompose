@@ -5,6 +5,8 @@ import ResultsGrid from './components/ResultsGrid';
 import './App.css';
 
 function App() {
+	const [statusMessage, setStatusMessage] =  useState("Awaiting query...");
+	const [statusError, setStatusError] =  useState(false);
 	const [itemGrid, setItemGrid] = useState(null);
 	const [count, setCount] = useState(0);
 	const [currentTime, setCurrentTime] = useState(0);
@@ -19,64 +21,46 @@ function App() {
 
 	// NOTE: React knows where to send fetch requests, see vite.config.js	
 
-	
-	function performSampleQuery() {
-		console.log("Asking API for data...");
-
-		// 1. Reach out to API.
-		// 2. Get API to send you the results of a query.
-		// 3. Pass the query results to the item grid.		
-
-		//setItemGrid(results);
-	}
-
-	function checkReadyAPI() {
-		console.log("Sending request...");
-		fetch
-		(
-			'/api/ready'
-		).then(
-			response => {
-				if (response.ok) {
-					return response.json();
-				}
-				throw response; // will be handled by catch
-			}
-		).then(
-			data => {
-				console.log("Query results received!");
-				console.log(data);
-			}
-		).catch(
-			exception => {
-				console.log("Couldn't connect!");
-				throw exception;
-			}
-		);
-	}
-
 
 	function runQuery(query) {
-		console.log("Sending query...");
+		console.log("Sending query...");	
 		fetch(
-			'/api/query?' + new URLSearchParams( {query: query,} )
+			'/api/query?' + new URLSearchParams( {query: query} )
 		).then(
 			response => {
-				if (response.ok) {
-					return response.json();
+				console.log("Response received, status code: " + response.status);
+				console.log(response);
+				setStatusError(!response.ok);
+				if (response.status === 400){
+					console.log("Here dat boi");
+					console.log(response.json());
 				}
+				if (response.ok) {
+					setStatusMessage("Query executed successfully.");
+					if (response.status === 204){
+						return Promise.resolve(null);
+					}else{
+						let data = response.json();
+						console.log(data);
+						return data;
+					}
+				}
+				setStatusMessage("Something bad happened. (add better error-handling later)");
 				throw response; // will be handled by catch
 			}
 		).then(
 			data => {
 				console.log("Query results received!");
-				setItemGrid(data);
+				if (data != null){
+					setItemGrid(data);
+				}
 				console.log(data);
 			}
 		).catch(
 			exception => {
-				console.log("Couldn't connect!");
-				throw exception;
+				// put any specific error-handling here
+				console.log("...and then an error occurred.");
+				//throw exception; // enable anytime you want to see the details in the log
 			}
 		);
 	}
@@ -86,18 +70,11 @@ function App() {
 	return (
 		<>
 			<div className="upper">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<button onClick={checkReadyAPI}>
-					Test Connection
-				</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR.
-				</p>
 				<QueryForm
 					runQuery={runQuery}
 					defaultQueryText={defaultQuery}
+					statusMessage={statusMessage}
+					statusError={statusError}
 				/>			
 			</div>
 			<div className="lower">

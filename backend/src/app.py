@@ -53,9 +53,15 @@ def get_api_query():
 		print(results)
 	except Exception as e:
 		print(f'Error: {e}')
-		database.rollback()	
+		database.rollback()
+		raise e
 
-	return results
+	if results is None:
+		httpStatusCode = 204
+		results = ''
+	else:
+		httpStatusCode = 200
+	return (results, httpStatusCode)
 
 
 
