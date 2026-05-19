@@ -1,4 +1,4 @@
-# PostgreSQL Query Interface with Docker Compose, Flask, and React
+# PostgreSQL UI with Docker Compose, Flask, and React
 I wanted to tinker with PostgreSQL, so I decided to use Docker Compose to get a simple Flask backend interfacing with a PostgreSQL container.  Then I added in a simple React frontend so that I could dynamically execute queries.  It's a fairly rudimentary tool, but in the process of getting it all working I learned a great deal about debugging and orchestrating multi-container applications.
 
 ## Windows Instructions:
