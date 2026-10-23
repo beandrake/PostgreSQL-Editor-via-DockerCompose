@@ -3,7 +3,7 @@
 # =========================================
 
 # Set base image (host OS)
-ARG NODE_VERSION=24.14.0-alpine
+ARG NODE_VERSION=24.22.1-alpine
  
 FROM node:${NODE_VERSION} AS devbuild
 

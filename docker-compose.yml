@@ -50,7 +50,7 @@ services:
           target: /app
 
   db: #NOTE: this is treated as the server/computer name
-    image: postgres:13.22-alpine
+    image: postgres:16.15-alpine
     restart: always
     # set shared memory limit when using docker compose
     shm_size: 128mb

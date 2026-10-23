@@ -1,5 +1,5 @@
 # Set base image (hose OS)
-FROM python:3.13.9-alpine
+FROM python:3.15.1-alpine
 
 # Set the working directory in the container.
 WORKDIR /code
